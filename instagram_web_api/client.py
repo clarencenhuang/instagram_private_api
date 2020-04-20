@@ -313,7 +313,7 @@ class Client(object):
             r'"rhx_gis":"(?P<rhx_gis>[a-f0-9]{32})"', html, re.MULTILINE)
         if mobj:
             return mobj.group('rhx_gis')
-        return None
+        return ''
 
     @staticmethod
     def _extract_csrftoken(html):
