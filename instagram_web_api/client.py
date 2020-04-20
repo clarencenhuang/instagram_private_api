@@ -93,7 +93,7 @@ class Client(object):
                                   or self.MOBILE_USER_AGENT)
 
         self.init_csrftoken = None
-        self.rhx_gis = kwargs.pop('rhx_gis', None) or user_settings.get('rhx_gis')
+        self.rhx_gis = kwargs.pop('rhx_gis', '') or user_settings.get('rhx_gis', '')
         self.rollout_hash = '1'
 
         cookie_string = kwargs.pop('cookie', None) or user_settings.get('cookie')
@@ -368,7 +368,7 @@ class Client(object):
 
         if not self.csrftoken:
             raise ClientError('Unable to get csrf from init request.')
-        if not self.rhx_gis:
+        if self.rhx_gis is None:
             raise ClientError('Unable to get rhx_gis from init request.')
         # required to avoid 403 when doing unauthenticated requests
         self.cookie_jar.set_cookie(
